@@ -52,6 +52,14 @@ class Documents {
         queryParams: {...?options, "action": "update"});
   }
 
+  /// Emplaces a [document].
+  Future<Map<String, dynamic>> emplace(Map<String, dynamic> document,
+      {Map<String, dynamic>? options}) async {
+    return await _apicall.post(_endPoint,
+        bodyParameters: document,
+        queryParams: {...?options, "action": "emplace"});
+  }
+
   /// Deletes all the documents the match the [queryParameters].
   Future<Map<String, dynamic>> delete(
       Map<String, String> queryParameters) async {

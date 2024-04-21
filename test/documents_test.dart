@@ -46,6 +46,18 @@ void main() {
           .thenAnswer((realInvocation) => Future.value(document));
       expect(await documents.upsert(document), equals(document));
     });
+    test("emplace() calls ApiCall.post()", () async {
+      final document = {
+        'id': '124',
+        'company_name': 'Stark Industries',
+        'num_employees': 5215,
+        'country': 'USA',
+      };
+      when(mockApiCall.post("/collections/companies/documents",
+              bodyParameters: document, queryParams: {"action": "emplace"}))
+          .thenAnswer((realInvocation) => Future.value(document));
+      expect(await documents.emplace(document), equals(document));
+    });
     test("update() calls ApiCall.post()", () async {
       final document = {
         'company_name': 'Stark Industries',
